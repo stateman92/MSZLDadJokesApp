@@ -24,12 +24,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+
+    buildFeatures {
+        compose true
     }
 }
 
@@ -38,9 +48,35 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.compose.material:material:1.1.1'
 
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    // hilt
+    implementation "com.google.dagger:hilt-android:2.40.5"
+    kapt "com.google.dagger:hilt-compiler:2.40.5"
+
+    // by viewModels()
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
+
+    // setContent { }
+    implementation "androidx.activity:activity-compose:1.4.0"
+
+    // rememberNavController()
+    implementation "androidx.navigation:navigation-compose:2.4.1"
+
+    // ProvideWindowInsets { }
+    implementation "com.google.accompanist:accompanist-insets:0.20.2"
+
+    // architecture components
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+    implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // network
+    implementation "com.github.skydoves:sandwich:1.2.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
