@@ -13,6 +13,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import hu.bme.aut.dadjokes.ui.AppBar
 import hu.bme.aut.dadjokes.ui.NavScreen
 import hu.bme.aut.dadjokes.ui.details.DetailsScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun MainScreen() {
@@ -21,12 +22,8 @@ fun MainScreen() {
     ProvideWindowInsets {
         NavHost(navController = navController, startDestination = NavScreen.Home.route) {
             composable(NavScreen.Home.route) {
-                Scaffold(topBar = { AppBar() }) {
-                    Button(onClick = {
-                        navController.navigate("${NavScreen.Details.route}/111")
-                    }) {
-                        Text(text = "Navigate next")
-                    }
+                Jokes(viewModel = hiltViewModel()) {
+                    navController.navigate("${NavScreen.Details.route}/$it")
                 }
             }
             composable(

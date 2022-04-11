@@ -1,3 +1,9 @@
 package hu.bme.aut.dadjokes.ui.base
 
-open class BaseRepository { }
+import hu.bme.aut.dadjokes.common.print
+
+open class BaseRepository {
+    init {
+        "$this is created".print()
+    }
+}
