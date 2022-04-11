@@ -8,12 +8,12 @@ import hu.bme.aut.dadjokes.model.Joke
 
 @Dao
 interface JokeDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertJokeList(posters: List<Joke>)
-
     @Query("SELECT * FROM Joke WHERE id = :id_")
     suspend fun getJoke(id_: Long): Joke?
 
     @Query("SELECT * FROM Joke")
     suspend fun getJokeList(): List<Joke>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertJokeList(jokes: List<Joke>)
 }

@@ -1,0 +1,156 @@
+swagger: '2.0'
+info:
+  description: API specification for my MSZL assignment
+  version: 2.0.0
+  title: DadJokes
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    
+host: dad-jokes.p.rapidapi.com
+basePath: /
+schemes:
+  - https
+
+paths:
+  /random/joke:
+    get:
+      summary: Get some random jokes
+      description: Returns a joke object that contains a setup, punchline, type and id
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: count
+        required: true
+        type: string
+      - in: header
+        name: x-rapidapi-key
+        required: true
+        type: string
+      responses:
+        200:
+          description: Some jokes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/JokeListResponseDTO'
+        400:
+          description: Bad request
+  /joke:
+    put:
+      summary: Like a joke
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: id
+        required: true
+        type: string
+      - in: header
+        name: x-rapidapi-key
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad request
+    post:
+      summary: Create a joke
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: joke
+        schema:
+          $ref: '#/definitions/JokeDTO'
+      - in: header
+        name: x-rapidapi-key
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad request
+    delete:
+      summary: Delete a joke
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: id
+        required: true
+        type: string
+      - in: header
+        name: x-rapidapi-key
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad request
+
+definitions:
+  JokeListResponseDTO:
+    required:
+    - success
+    - body
+    properties:
+      success:
+        type: boolean
+        example: true
+      body:
+        type: array
+        items:
+          $ref: '#/definitions/JokeDTO'
+  JokeDTO:
+    required:
+    - type
+    - setup
+    - punchline
+    properties:
+      _id:
+        type: string
+        example: "5f80ccd641785ba7c7d27ba2"
+      type:
+        type: string
+        example: "general"
+      setup:
+        type: string
+        example: "Did you hear about the guy who invented Lifesavers?"
+      punchline:
+        type: string
+        example: "They say he made a mint."
+      author:
+        $ref: '#/definitions/AuthorDTO'
+      approved:
+        type: boolean
+        example: true
+      date:
+        type: integer
+        example: 1618108661
+      NSFW:
+        type: boolean
+        example: false
+  AuthorDTO:
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        example: "unknown"
+      id:
+        type: string
+        example: "5f80ccd641785ba7c7d27ba2"

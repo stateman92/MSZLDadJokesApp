@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import hu.bme.aut.dadjokes.common.Constants
 import hu.bme.aut.dadjokes.network.NetworkService
 import hu.bme.aut.dadjokes.network.RequestInterceptor
 import okhttp3.OkHttpClient
@@ -28,7 +29,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("https://dad-jokes.p.rapidapi.com/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
             .build()
