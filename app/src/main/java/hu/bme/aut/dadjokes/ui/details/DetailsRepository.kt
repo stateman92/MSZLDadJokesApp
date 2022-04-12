@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class DetailsRepository @Inject constructor(
     private val jokeDao: JokeDao
-): BaseRepository() {
+) : BaseRepository() {
     @WorkerThread
-    fun getJokeById(id: Long) = flow {
+    fun getJokeById(id: String) = flow {
         val joke = jokeDao.getJoke(id)
         emit(joke)
     }.flowOn(Dispatchers.IO)

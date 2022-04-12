@@ -1,7 +1,10 @@
 package hu.bme.aut.dadjokes.ui.main
 
 import androidx.annotation.WorkerThread
-import com.skydoves.sandwich.*
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onException
+import com.skydoves.sandwich.suspendOnSuccess
 import hu.bme.aut.dadjokes.model.mapping.toJokes
 import hu.bme.aut.dadjokes.network.NetworkService
 import hu.bme.aut.dadjokes.persistence.JokeDao
@@ -16,20 +19,20 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(
     private val networkService: NetworkService,
     private val jokeDao: JokeDao
-): BaseRepository() {
+) : BaseRepository() {
     @WorkerThread
-    fun loadJokeList(
+    fun getJokeList(
         onStart: () -> Unit,
         onCompletion: () -> Unit,
         onError: (String) -> Unit
     ) = flow {
         val jokes = jokeDao.getJokeList()
         if (jokes.isEmpty()) {
-            networkService.getJokeList("10")
+            networkService.getJokeList("5")
                 .suspendOnSuccess {
-                    val jokes = data.toJokes()
-                    jokeDao.insertJokeList(jokes)
-                    emit(jokes)
+                    val newJokes = data.toJokes() + jokes
+                    jokeDao.insertJokeList(newJokes)
+                    emit(newJokes)
                 }
                 .onError {
                     onError(message())
@@ -40,5 +43,26 @@ class MainRepository @Inject constructor(
         } else {
             emit(jokes)
         }
+    }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
+
+    @WorkerThread
+    fun load(
+        onStart: () -> Unit,
+        onCompletion: () -> Unit,
+        onError: (String) -> Unit
+    ) = flow {
+        val jokes = jokeDao.getJokeList()
+        networkService.getJokeList("5")
+            .suspendOnSuccess {
+                val newJokes = data.toJokes() + jokes
+                jokeDao.insertJokeList(newJokes)
+                emit(newJokes)
+            }
+            .onError {
+                onError(message())
+            }
+            .onException {
+                onError(message())
+            }
     }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
 }
