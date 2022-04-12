@@ -8,7 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hu.bme.aut.dadjokes.R
 import hu.bme.aut.dadjokes.persistence.AppDatabase
-import hu.bme.aut.dadjokes.persistence.JokeDao
 import javax.inject.Singleton
 
 @Module
@@ -17,13 +16,13 @@ object PersistenceModule {
     @Provides
     @Singleton
     fun provideAppDatabase(application: Application) = Room
-            .databaseBuilder(
-                application,
-                AppDatabase::class.java,
-                application.getString(R.string.database)
-            )
-            .fallbackToDestructiveMigration()
-            .build()
+        .databaseBuilder(
+            application,
+            AppDatabase::class.java,
+            application.getString(R.string.database)
+        )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     @Singleton

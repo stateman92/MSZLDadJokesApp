@@ -1,7 +1,6 @@
 package hu.bme.aut.dadjokes.di
 
 import android.content.Context
-import android.os.Build
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -22,17 +21,17 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context: Context) = OkHttpClient.Builder()
-            .addInterceptor(RequestInterceptor())
-            .build()
+        .addInterceptor(RequestInterceptor())
+        .build()
 
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
-            .build()
+        .client(okHttpClient)
+        .baseUrl(Constants.BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+        .build()
 
     @Provides
     @Singleton
