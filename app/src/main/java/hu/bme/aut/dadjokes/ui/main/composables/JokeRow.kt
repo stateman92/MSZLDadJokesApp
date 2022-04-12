@@ -12,11 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import hu.bme.aut.dadjokes.R
 import hu.bme.aut.dadjokes.model.Joke
 import hu.bme.aut.dadjokes.ui.base.composables.JokeText
-import java.text.SimpleDateFormat
-import java.util.*
+import java.text.DateFormat.getDateTimeInstance
 
 @Composable
 fun JokeRow(
@@ -26,17 +27,24 @@ fun JokeRow(
 ) {
     Surface(
         modifier = modifier
-            .padding(4.dp)
+            .padding(all = 4.dp)
             .clickable(
                 onClick = { selectJoke(joke.id) }
             ),
         elevation = 16.dp,
-        shape = RoundedCornerShape(24.dp)
+        shape = RoundedCornerShape(size = 24.dp)
     ) {
         Column(
             modifier = Modifier
-                .background(Color.LightGray)
-                .padding(PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp))
+                .background(color = Color.LightGray)
+                .padding(
+                    paddingValues = PaddingValues(
+                        start = 8.dp,
+                        end = 8.dp,
+                        top = 4.dp,
+                        bottom = 4.dp
+                    )
+                )
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -46,12 +54,15 @@ fun JokeRow(
             )
 
             JokeText(
-                text = SimpleDateFormat("yyyy.MM.dd. HH:mm").format(Date(joke.date.toLong())),
+                text = getDateTimeInstance().format(joke.computedDate),
                 backgroundColor = Color.LightGray
             )
 
             if (joke.NSFW) {
-                JokeText(text = "Warning! NSFW!", backgroundColor = Color.LightGray)
+                JokeText(
+                    text = stringResource(R.string.warning_nsfw),
+                    backgroundColor = Color.LightGray
+                )
             }
         }
     }

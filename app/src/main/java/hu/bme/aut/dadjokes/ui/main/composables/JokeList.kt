@@ -20,14 +20,16 @@ fun JokeList(
         modifier = modifier
             .statusBarsPadding()
     ) {
-        items(items = jokes, itemContent = {
-            JokeRow(
-                modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
-                joke = it,
-                selectJoke = selectJoke
-            )
-        }) {
+        items(
+            items = jokes,
+            itemContent = {
+                JokeRow(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
+                    joke = it,
+                    selectJoke = selectJoke
+                )
+            }) {
             requestMore()
         }
     }

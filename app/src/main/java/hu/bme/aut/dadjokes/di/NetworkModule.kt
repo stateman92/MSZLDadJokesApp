@@ -1,6 +1,7 @@
 package hu.bme.aut.dadjokes.di
 
 import android.content.Context
+import androidx.annotation.NonNull
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -26,7 +27,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
+    fun provideRetrofit(@NonNull okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(Constants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -35,5 +36,6 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideNetworkService(retrofit: Retrofit) = retrofit.create(NetworkService::class.java)
+    fun provideNetworkService(retrofit: Retrofit): NetworkService =
+        retrofit.create(NetworkService::class.java)
 }

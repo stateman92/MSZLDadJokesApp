@@ -8,11 +8,11 @@ import okhttp3.Response
 class RequestInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
-        val request = originalRequest.newBuilder()
-            .url(originalRequest.url)
+        val request = originalRequest
+            .newBuilder()
             .addHeader(
                 Constants.API_KEY_HEADER_NAME,
-                ""
+                "68d504fffcmsh04aeb62160a2fc7p1210cajsnc525ca1a10ec"
             )
             .build()
         request.toString().print()

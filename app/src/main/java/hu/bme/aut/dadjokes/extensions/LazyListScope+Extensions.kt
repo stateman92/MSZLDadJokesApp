@@ -13,7 +13,7 @@ fun LazyListScope.items(
 ) {
     items(count = count, key = key) {
         if (it == count - 1) {
-            LaunchedEffect(Unit) {
+            LaunchedEffect(key1 = Unit) {
                 lastItemIsShown()
             }
         }

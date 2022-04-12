@@ -13,7 +13,7 @@ class DetailsRepository @Inject constructor(
 ) : BaseRepository() {
     @WorkerThread
     fun getJokeById(id: String) = flow {
-        val joke = jokeDao.getJoke(id)
-        emit(joke)
-    }.flowOn(Dispatchers.IO)
+        val joke = jokeDao.getJoke(id_ = id)
+        emit(value = joke)
+    }.flowOn(context = Dispatchers.IO)
 }
