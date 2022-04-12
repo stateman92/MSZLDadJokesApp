@@ -5,4 +5,5 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 
 @Stable
-fun Modifier.visible(visibility: Boolean): Modifier = then(alpha(if (visibility) 1f else 0f))
+fun Modifier.visible(visibility: Boolean): Modifier =
+    then(other = alpha(alpha = if (visibility) 1f else 0f))

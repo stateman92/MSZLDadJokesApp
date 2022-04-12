@@ -22,8 +22,8 @@ fun AppBar() {
     ) {
         Text(
             modifier = Modifier
-                .padding(8.dp)
-                .align(Alignment.CenterVertically),
+                .padding(all = 8.dp)
+                .align(alignment = Alignment.CenterVertically),
             text = stringResource(R.string.app_name),
             color = Color.White,
             fontSize = 18.sp,

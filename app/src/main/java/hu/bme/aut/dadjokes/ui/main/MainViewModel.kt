@@ -1,6 +1,5 @@
 package hu.bme.aut.dadjokes.ui.main
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
@@ -16,10 +15,10 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel() {
-    private var _jokes = mutableStateOf(listOf<Joke>())
+    private var _jokes = mutableStateOf(value = listOf<Joke>())
     val jokes: State<List<Joke>> get() = _jokes
 
-    private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
+    private val _isLoading = mutableStateOf(value = false)
     val isLoading: State<Boolean> get() = _isLoading
 
     init {
@@ -27,11 +26,10 @@ class MainViewModel @Inject constructor(
     }
 
     fun requestMore() {
-        viewModelScope.launch(Dispatchers.Main) {
-            mainRepository.load(
+        viewModelScope.launch(context = Dispatchers.Main) {
+            mainRepository.loadMoreJokes(
                 onStart = { _isLoading.value = true },
-                onCompletion = { _isLoading.value = false },
-                onError = { }
+                onCompletion = { _isLoading.value = false }
             ).collect {
                 _jokes.value = it
             }
@@ -39,11 +37,10 @@ class MainViewModel @Inject constructor(
     }
 
     private fun loadInitialData() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(context = Dispatchers.Main) {
             mainRepository.getJokeList(
                 onStart = { _isLoading.value = true },
-                onCompletion = { _isLoading.value = false },
-                onError = { }
+                onCompletion = { _isLoading.value = false }
             ).collect {
                 _jokes.value = it
             }

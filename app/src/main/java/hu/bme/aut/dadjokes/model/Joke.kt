@@ -3,6 +3,7 @@ package hu.bme.aut.dadjokes.model
 import androidx.compose.runtime.Immutable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity
 @Immutable
@@ -17,13 +18,15 @@ data class Joke(
 ) {
     companion object {
         fun mock() = Joke(
-            id = "0",
-            headline = "What do you call Dragon with no silver?",
-            punchline = "A dron",
-            type = "Silver",
+            id = "60dd36a777fa33b5b73bc468",
+            headline = "Everyone told me smoking kills, I had no idea how fast.",
+            punchline = "My dad went to get his first pack of cigarettes ever and I never saw him again.",
+            type = "idea",
             author = "unknown",
-            date = 1000,
-            NSFW = true
+            date = 1618108661,
+            NSFW = false
         )
     }
+
+    val computedDate: Date get() = Date(date.toLong())
 }

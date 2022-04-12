@@ -18,14 +18,14 @@ class DetailsViewModel @Inject constructor(
     private val detailRepository: DetailsRepository,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-    private var _joke = mutableStateOf(Joke.mock())
+    private var _joke = mutableStateOf(value = Joke.mock())
     val joke: State<Joke> get() = _joke
 
     init {
         val jokeId = savedStateHandle.get(NavScreen.Details.argument0) as? String
         jokeId?.let {
-            viewModelScope.launch(Dispatchers.Main) {
-                detailRepository.getJokeById(it)
+            viewModelScope.launch(context = Dispatchers.Main) {
+                detailRepository.getJokeById(id = it)
                     .collect {
                         it?.let {
                             _joke.value = it

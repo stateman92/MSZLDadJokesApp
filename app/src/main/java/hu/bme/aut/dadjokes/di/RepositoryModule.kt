@@ -15,7 +15,7 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideMainRepository(
-        disneyService: NetworkService,
+        networkService: NetworkService,
         jokeDao: JokeDao
-    ) = MainRepository(disneyService, jokeDao)
+    ) = MainRepository(networkService = networkService, jokeDao = jokeDao)
 }
