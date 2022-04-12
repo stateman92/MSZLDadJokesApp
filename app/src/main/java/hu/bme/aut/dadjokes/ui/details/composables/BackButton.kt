@@ -20,7 +20,7 @@ fun BackButton(
         tint = Color(R.color.purple_200),
         contentDescription = null,
         modifier = Modifier
-            .padding(12.dp)
+            .padding(all = 12.dp)
             .clickable(onClick = pressOnBack)
     )
 }

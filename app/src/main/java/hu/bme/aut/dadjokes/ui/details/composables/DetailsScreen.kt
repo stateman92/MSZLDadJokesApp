@@ -13,5 +13,5 @@ fun DetailsScreen(
     val joke by viewModel.joke
 
     BackButton(pressOnBack = pressOnBack)
-    Text(joke.headline)
+    Text(text = joke.headline)
 }

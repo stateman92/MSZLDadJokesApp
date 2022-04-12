@@ -17,9 +17,9 @@ fun Screen() {
 
     ProvideWindowInsets {
         NavHost(navController = navController, startDestination = NavScreen.Home.route) {
-            composable(NavScreen.Home.route) {
+            composable(route = NavScreen.Home.route) {
                 MainScreen(viewModel = hiltViewModel()) {
-                    navController.navigate("${NavScreen.Details.route}/$it")
+                    navController.navigate(route = "${NavScreen.Details.route}/$it")
                 }
             }
             composable(

@@ -20,15 +20,19 @@ class MainRepository @Inject constructor(
     private val networkService: NetworkService,
     private val jokeDao: JokeDao
 ) : BaseRepository() {
+    companion object {
+        const val PAGE_SIZE = "5"
+    }
+
     @WorkerThread
     fun getJokeList(
         onStart: () -> Unit,
         onCompletion: () -> Unit,
-        onError: (String) -> Unit
+        onError: (String) -> Unit = { }
     ) = flow {
         val jokes = jokeDao.getJokeList()
         if (jokes.isEmpty()) {
-            networkService.getJokeList("5")
+            networkService.getJokeList(PAGE_SIZE)
                 .suspendOnSuccess {
                     val newJokes = data.toJokes() + jokes
                     jokeDao.insertJokeList(newJokes)
@@ -41,22 +45,22 @@ class MainRepository @Inject constructor(
                     onError(message())
                 }
         } else {
-            emit(jokes)
+            emit(value = jokes)
         }
-    }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
+    }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(context = Dispatchers.IO)
 
     @WorkerThread
-    fun load(
+    fun loadMoreJokes(
         onStart: () -> Unit,
         onCompletion: () -> Unit,
-        onError: (String) -> Unit
+        onError: (String) -> Unit = { }
     ) = flow {
         val jokes = jokeDao.getJokeList()
-        networkService.getJokeList("5")
+        networkService.getJokeList(PAGE_SIZE)
             .suspendOnSuccess {
                 val newJokes = data.toJokes() + jokes
                 jokeDao.insertJokeList(newJokes)
-                emit(newJokes)
+                emit(value = newJokes)
             }
             .onError {
                 onError(message())
@@ -64,5 +68,5 @@ class MainRepository @Inject constructor(
             .onException {
                 onError(message())
             }
-    }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
+    }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(context = Dispatchers.IO)
 }

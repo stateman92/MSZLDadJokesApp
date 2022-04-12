@@ -30,7 +30,7 @@ fun JokeText(
         ) {
             Text(
                 modifier = Modifier
-                    .padding(padding),
+                    .padding(paddingValues = padding),
                 text = text,
                 style = MaterialTheme.typography.body1,
                 textAlign = TextAlign.Center,

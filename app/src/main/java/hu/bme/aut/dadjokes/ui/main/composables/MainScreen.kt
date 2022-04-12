@@ -26,8 +26,8 @@ fun MainScreen(
         Scaffold(topBar = { AppBar() }) {
             JokeList(
                 modifier = Modifier
-                    .padding(it)
-                    .alpha(if (isLoading) 0.5f else 1f),
+                    .padding(paddingValues = it)
+                    .alpha(alpha = if (isLoading) 0.5f else 1f),
                 jokes = jokes,
                 selectJoke = selectJoke
             ) {
@@ -36,13 +36,13 @@ fun MainScreen(
         }
         CircularProgressIndicator(
             modifier = Modifier
-                .constrainAs(progress) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
+                .constrainAs(ref = progress) {
+                    top.linkTo(anchor = parent.top)
+                    bottom.linkTo(anchor = parent.bottom)
+                    start.linkTo(anchor = parent.start)
+                    end.linkTo(anchor = parent.end)
                 }
-                .visible(isLoading)
+                .visible(visibility = isLoading)
         )
     }
 }

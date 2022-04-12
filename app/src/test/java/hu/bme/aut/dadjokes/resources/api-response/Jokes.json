@@ -1,0 +1,75 @@
+{
+  "success": true,
+  "body": [
+    {
+      "_id": "60dd36610b83921d24207d9f",
+      "setup": "I just released a new fragrance",
+      "punchline": "Nobody in the car seemed to like it",
+      "type": "fragrance",
+      "likes": [],
+      "author": {
+        "name": "unknown",
+        "id": null
+      },
+      "approved": true,
+      "date": 1618108661,
+      "NSFW": false
+    },
+    {
+      "_id": "60dd3770d3008f40c3ca0468",
+      "setup": "I told my girlfriend she'd get Sax lessons for her birthday",
+      "punchline": "Offended she asked: \"Sex lessons? Isn't it good enough?\".\"Oh no honey, I meant the saxophone.So you can finally learn how to blow.\"",
+      "type": "saxophone",
+      "likes": [],
+      "author": {
+        "name": "unknown",
+        "id": null
+      },
+      "approved": true,
+      "date": 1618108661,
+      "NSFW": false
+    },
+    {
+      "_id": "60dd36fcdab733e4043c57b2",
+      "setup": "I had dinner with my mother in law the other night. Was gonna ask \"would you to pass the salt, please\"",
+      "punchline": "But instead my tounge twisted and I said \"You stupid cow. You've completely ruined my life.\"",
+      "type": "mother",
+      "likes": [],
+      "author": {
+        "name": "unknown",
+        "id": null
+      },
+      "approved": true,
+      "date": 1618108661,
+      "NSFW": false
+    },
+    {
+      "_id": "60dd357e58c9ac18ff928c75",
+      "setup": "A guys wife is in a coma. He goes in one day to see her and decides to sneakily grab a handful of boob. The alarms at the nurses desk go off. Doctors come in and tell him that more physical contact could wake her from the coma. They advise he should attempt oral sex to wake her up...",
+      "punchline": "Minutes pass and the alarms go off again but the doctors discover that she’s now dead. They ask the man what happened?“She choked”",
+      "type": "alarm",
+      "likes": [],
+      "author": {
+        "name": "unknown",
+        "id": null
+      },
+      "approved": true,
+      "date": 1618108661,
+      "NSFW": true
+    },
+    {
+      "_id": "60dd3740f74ca49c196bcb90",
+      "setup": "What can solve over population and world hunger at the same time?",
+      "punchline": "Cannibalism",
+      "type": "population",
+      "likes": [],
+      "author": {
+        "name": "unknown",
+        "id": null
+      },
+      "approved": true,
+      "date": 1618108661,
+      "NSFW": false
+    }
+  ]
+}
