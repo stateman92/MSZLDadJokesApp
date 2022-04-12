@@ -1,4 +1,4 @@
-package hu.bme.aut.dadjokes.ui
+package hu.bme.aut.dadjokes.ui.base.composables
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding

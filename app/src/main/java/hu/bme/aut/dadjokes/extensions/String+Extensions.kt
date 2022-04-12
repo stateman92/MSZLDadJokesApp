@@ -1,4 +1,4 @@
-package hu.bme.aut.dadjokes.common
+package hu.bme.aut.dadjokes.extensions
 
 import android.util.Log
 
