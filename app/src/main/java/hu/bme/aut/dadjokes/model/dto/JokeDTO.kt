@@ -1,8 +1,6 @@
 package hu.bme.aut.dadjokes.model.dto
 
-import hu.bme.aut.dadjokes.model.dto.AuthorDTO
-
-data class JokeDTO (
+data class JokeDTO(
     val type: String,
     val setup: String,
     val punchline: String,
