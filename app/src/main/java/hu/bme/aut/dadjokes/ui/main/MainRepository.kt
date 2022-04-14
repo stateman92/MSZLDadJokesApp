@@ -32,10 +32,10 @@ class MainRepository @Inject constructor(
     ) = flow {
         val jokes = jokeDao.getJokeList()
         if (jokes.isEmpty()) {
-            networkService.getJokeList(PAGE_SIZE)
+            networkService.getJokeList(count = PAGE_SIZE)
                 .suspendOnSuccess {
                     val newJokes = data.toJokes() + jokes
-                    jokeDao.insertJokeList(newJokes)
+                    jokeDao.insertJokeList(jokes = newJokes)
                     emit(newJokes)
                 }
                 .onError {
@@ -56,10 +56,10 @@ class MainRepository @Inject constructor(
         onError: (String) -> Unit = { }
     ) = flow {
         val jokes = jokeDao.getJokeList()
-        networkService.getJokeList(PAGE_SIZE)
+        networkService.getJokeList(count = PAGE_SIZE)
             .suspendOnSuccess {
                 val newJokes = data.toJokes() + jokes
-                jokeDao.insertJokeList(newJokes)
+                jokeDao.insertJokeList(jokes = newJokes)
                 emit(value = newJokes)
             }
             .onError {

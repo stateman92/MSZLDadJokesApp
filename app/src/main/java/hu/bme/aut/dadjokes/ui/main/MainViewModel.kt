@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.dadjokes.model.Joke
 import hu.bme.aut.dadjokes.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

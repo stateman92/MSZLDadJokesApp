@@ -1,5 +1,7 @@
 package hu.bme.aut.dadjokes.ui.base.composables
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -15,19 +17,25 @@ import androidx.compose.ui.unit.sp
 import hu.bme.aut.dadjokes.R
 
 @Composable
-fun AppBar() {
+fun AppBar(
+    title: String = stringResource(id = R.string.app_name),
+    content: @Composable RowScope.() -> Unit = { }
+) {
     TopAppBar(
         elevation = 6.dp,
         modifier = Modifier.height(58.dp)
     ) {
-        Text(
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .align(alignment = Alignment.CenterVertically),
-            text = stringResource(R.string.app_name),
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Row {
+            content()
+            Text(
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .align(alignment = Alignment.CenterVertically),
+                text = title,
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }

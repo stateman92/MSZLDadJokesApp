@@ -10,30 +10,32 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun JokeText(
+    modifier: Modifier = Modifier,
     text: String,
     padding: PaddingValues = PaddingValues(all = 4.dp),
     elevation: Dp = 0.dp,
-    backgroundColor: Color = Color.White
+    backgroundColor: Color = Color.LightGray,
+    style: TextStyle = MaterialTheme.typography.body1
 ) {
-    Box(modifier = Modifier) {
+    Box(modifier = modifier) {
         Card(
             modifier = Modifier,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(size = 24.dp),
             backgroundColor = backgroundColor,
             elevation = elevation
         ) {
             Text(
-                modifier = Modifier
-                    .padding(paddingValues = padding),
+                modifier = Modifier.padding(paddingValues = padding),
                 text = text,
-                style = MaterialTheme.typography.body1,
-                textAlign = TextAlign.Center,
+                style = style,
+                textAlign = TextAlign.Center
             )
         }
     }
