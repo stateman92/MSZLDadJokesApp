@@ -28,9 +28,7 @@ fun JokeRow(
     Surface(
         modifier = modifier
             .padding(all = 4.dp)
-            .clickable(
-                onClick = { selectJoke(joke.id) }
-            ),
+            .clickable(onClick = { selectJoke(joke.id) }),
         elevation = 16.dp,
         shape = RoundedCornerShape(size = 24.dp)
     ) {
@@ -48,21 +46,12 @@ fun JokeRow(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            JokeText(
-                text = joke.headline,
-                backgroundColor = Color.LightGray
-            )
+            JokeText(text = joke.headline)
 
-            JokeText(
-                text = getDateTimeInstance().format(joke.computedDate),
-                backgroundColor = Color.LightGray
-            )
+            JokeText(text = getDateTimeInstance().format(joke.computedDate))
 
             if (joke.NSFW) {
-                JokeText(
-                    text = stringResource(R.string.warning_nsfw),
-                    backgroundColor = Color.LightGray
-                )
+                JokeText(text = stringResource(R.string.warning_nsfw))
             }
         }
     }
