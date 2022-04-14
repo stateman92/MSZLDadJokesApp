@@ -23,7 +23,9 @@ fun MainScreen(
     ConstraintLayout {
         val (_, progress) = createRefs()
 
-        Scaffold(topBar = { AppBar() }) {
+        Scaffold(topBar = {
+            AppBar()
+        }) {
             JokeList(
                 modifier = Modifier
                     .padding(paddingValues = it)

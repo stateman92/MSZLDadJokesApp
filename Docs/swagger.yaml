@@ -7,7 +7,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-    
+
 host: dad-jokes.p.rapidapi.com
 basePath: /
 schemes:
@@ -19,18 +19,18 @@ paths:
       summary: Get some random jokes
       description: Returns a joke object that contains a setup, punchline, type and id
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: query
-        name: count
-        required: true
-        type: string
-      - in: header
-        name: x-rapidapi-key
-        required: true
-        type: string
+        - in: query
+          name: count
+          required: true
+          type: string
+        - in: header
+          name: x-rapidapi-key
+          required: true
+          type: string
       responses:
         200:
           description: Some jokes
@@ -44,18 +44,18 @@ paths:
     put:
       summary: Like a joke
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: query
-        name: id
-        required: true
-        type: string
-      - in: header
-        name: x-rapidapi-key
-        required: true
-        type: string
+        - in: query
+          name: id
+          required: true
+          type: string
+        - in: header
+          name: x-rapidapi-key
+          required: true
+          type: string
       responses:
         200:
           description: OK
@@ -64,18 +64,18 @@ paths:
     post:
       summary: Create a joke
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: joke
-        schema:
-          $ref: '#/definitions/JokeDTO'
-      - in: header
-        name: x-rapidapi-key
-        required: true
-        type: string
+        - in: body
+          name: joke
+          schema:
+            $ref: '#/definitions/JokeDTO'
+        - in: header
+          name: x-rapidapi-key
+          required: true
+          type: string
       responses:
         200:
           description: OK
@@ -84,18 +84,18 @@ paths:
     delete:
       summary: Delete a joke
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: query
-        name: id
-        required: true
-        type: string
-      - in: header
-        name: x-rapidapi-key
-        required: true
-        type: string
+        - in: query
+          name: id
+          required: true
+          type: string
+        - in: header
+          name: x-rapidapi-key
+          required: true
+          type: string
       responses:
         200:
           description: OK
@@ -105,8 +105,8 @@ paths:
 definitions:
   JokeListResponseDTO:
     required:
-    - success
-    - body
+      - success
+      - body
     properties:
       success:
         type: boolean
@@ -117,9 +117,9 @@ definitions:
           $ref: '#/definitions/JokeDTO'
   JokeDTO:
     required:
-    - type
-    - setup
-    - punchline
+      - type
+      - setup
+      - punchline
     properties:
       _id:
         type: string
@@ -146,7 +146,7 @@ definitions:
         example: false
   AuthorDTO:
     required:
-    - name
+      - name
     properties:
       name:
         type: string

@@ -44,7 +44,7 @@ abstract class ApiAbstract<T> {
 
     @Throws(IOException::class)
     private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
-        val inputStream = javaClass.classLoader!!.getResourceAsStream("api-response/$fileName")
+        val inputStream = javaClass.classLoader!!.getResourceAsStream(fileName)
         val source = inputStream.source().buffer()
         val mockResponse = MockResponse()
         for ((key, value) in headers) {

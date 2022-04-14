@@ -23,12 +23,12 @@ import java.text.DateFormat.getDateTimeInstance
 fun JokeRow(
     modifier: Modifier = Modifier,
     joke: Joke,
-    selectJoke: (String) -> Unit = { },
+    selectJoke: () -> Unit = { },
 ) {
     Surface(
         modifier = modifier
             .padding(all = 4.dp)
-            .clickable(onClick = { selectJoke(joke.id) }),
+            .clickable(onClick = selectJoke),
         elevation = 16.dp,
         shape = RoundedCornerShape(size = 24.dp)
     ) {

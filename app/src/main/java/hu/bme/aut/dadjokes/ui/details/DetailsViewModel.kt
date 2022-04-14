@@ -21,7 +21,7 @@ class DetailsViewModel @Inject constructor(
     val joke: State<Joke> get() = _joke
 
     init {
-        val jokeId = savedStateHandle.get(NavScreen.Details.argument0) as? String
+        val jokeId = savedStateHandle.get<String>(NavScreen.Details.argument0)
         jokeId?.let {
             viewModelScope.launch(context = Dispatchers.Main) {
                 detailRepository.getJokeById(id = it)

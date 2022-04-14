@@ -20,7 +20,9 @@ fun DetailsScreen(
 ) {
     val joke by viewModel.joke
 
-    Scaffold(topBar = { BackButtonBar(pressOnBack = pressOnBack) }) {
+    Scaffold(topBar = {
+        BackButtonBar(pressOnBack = pressOnBack)
+    }) {
         Column(
             modifier = Modifier
                 .verticalScroll(state = rememberScrollState())
