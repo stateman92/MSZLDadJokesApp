@@ -16,10 +16,7 @@ fun JokeList(
     selectJoke: (String) -> Unit,
     requestMore: () -> Unit
 ) {
-    LazyColumn(
-        modifier = modifier
-            .statusBarsPadding()
-    ) {
+    LazyColumn(modifier = modifier.statusBarsPadding()) {
         items(
             items = jokes,
             itemContent = {

@@ -25,7 +25,7 @@ fun Screen() {
             composable(
                 route = NavScreen.Details.routeWithArgument,
                 arguments = listOf(
-                    navArgument(NavScreen.Details.argument0) { type = NavType.StringType }
+                    element = navArgument(NavScreen.Details.argument0) { type = NavType.StringType }
                 )
             ) {
                 DetailsScreen(viewModel = hiltViewModel()) {

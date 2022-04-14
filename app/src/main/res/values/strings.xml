@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DadJokes</string>
     <string name="database">DadJokes.db</string>
+    <string name="joke">Joke</string>
+    <string name="show_more_jokes">Show more jokes!</string>
     <string name="warning_nsfw">"Warning! NSFW!"</string>
 </resources>

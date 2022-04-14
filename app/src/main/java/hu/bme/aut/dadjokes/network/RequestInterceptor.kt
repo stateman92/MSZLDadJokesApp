@@ -11,8 +11,8 @@ class RequestInterceptor : Interceptor {
         val request = originalRequest
             .newBuilder()
             .addHeader(
-                Constants.API_KEY_HEADER_NAME,
-                "68d504fffcmsh04aeb62160a2fc7p1210cajsnc525ca1a10ec"
+                name = Constants.API_KEY_HEADER_NAME,
+                value = ""
             )
             .build()
         request.toString().print()
