@@ -19,12 +19,12 @@ fun JokeList(
     LazyColumn(modifier = modifier.statusBarsPadding()) {
         items(
             items = jokes,
-            itemContent = {
+            itemContent = { joke ->
                 JokeRow(
                     modifier = Modifier
                         .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
-                    joke = it,
-                    selectJoke = selectJoke
+                    joke = joke,
+                    selectJoke = { selectJoke(joke.id) }
                 )
             }) {
             requestMore()
