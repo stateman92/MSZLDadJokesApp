@@ -48,7 +48,6 @@ fun JokeDetailsRow(
                 JokeText(
                     modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                     text = joke.punchline,
-                    backgroundColor = Color.LightGray,
                     style = MaterialTheme.typography.h5
                 )
 
