@@ -28,7 +28,7 @@ data class Joke(
         )
     }
 
-    val computedDate: Date get() = Date(date.toLong())
+    val computedDate get() = Date(date.toLong())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
