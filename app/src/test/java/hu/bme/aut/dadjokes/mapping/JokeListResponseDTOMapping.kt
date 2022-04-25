@@ -4,13 +4,15 @@ import hu.bme.aut.dadjokes.model.dto.AuthorDTO
 import hu.bme.aut.dadjokes.model.dto.JokeDTO
 import hu.bme.aut.dadjokes.model.dto.JokeListResponseDTO
 import hu.bme.aut.dadjokes.model.mapping.toJokes
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.util.*
 
 @RunWith(JUnit4::class)
-class JokeMapping {
+class JokeListResponseDTOMapping {
     @Test
     fun testDtoToDomain() {
         val dtoObject = JokeListResponseDTO(
@@ -28,15 +30,22 @@ class JokeMapping {
             )
         )
 
-        val mappedObject = dtoObject.toJokes()[0]
+        val mappedObject = dtoObject.toJokes().first()
 
-        assert(mappedObject.author == "name")
-        assert(!mappedObject.NSFW)
-        assert(mappedObject.date == 123)
-        assert(mappedObject.headline == "setup")
-        assert(mappedObject.punchline == "punchline")
-        assert(mappedObject.id == "jokeId")
-        assert(mappedObject.type == "type")
-        assert(mappedObject.computedDate == Date(123L))
+        assertEquals("name", mappedObject.author)
+        assertFalse(mappedObject.NSFW)
+        assertEquals(123, mappedObject.date)
+        assertEquals("setup", mappedObject.headline)
+        assertEquals("punchline", mappedObject.punchline)
+        assertEquals("jokeId", mappedObject.id)
+        assertEquals("type", mappedObject.type)
+        assertEquals(Date(123L), mappedObject.computedDate)
+    }
+
+    @Test(expected = NoSuchElementException::class)
+    fun testDtoToDomainEmptyResponse() {
+        val dtoObject = JokeListResponseDTO(success = true, body = arrayOf())
+
+        dtoObject.toJokes().first()
     }
 }

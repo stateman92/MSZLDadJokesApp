@@ -1,6 +1,5 @@
 package hu.bme.aut.dadjokes.network
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -8,7 +7,6 @@ import okio.buffer
 import okio.source
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
@@ -17,11 +15,7 @@ import java.io.IOException
 import java.nio.charset.StandardCharsets
 
 @RunWith(JUnit4::class)
-abstract class ApiAbstract<T> {
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
-
+abstract class ApiAbstract {
     lateinit var mockWebServer: MockWebServer
 
     @Throws(IOException::class)
@@ -38,7 +32,12 @@ abstract class ApiAbstract<T> {
     }
 
     @Throws(IOException::class)
-    fun enqueueResponse(fileName: String) {
+    protected fun enqueueResponse(resource: JsonResource) {
+        enqueueResponse(fileName = resource.fileName + ".json")
+    }
+
+    @Throws(IOException::class)
+    private fun enqueueResponse(fileName: String) {
         enqueueResponse(fileName, emptyMap())
     }
 
@@ -53,10 +52,10 @@ abstract class ApiAbstract<T> {
         mockWebServer.enqueue(mockResponse.setBody(source.readString(StandardCharsets.UTF_8)))
     }
 
-    fun createService(clazz: Class<T>): T = Retrofit.Builder()
+    protected inline fun <reified T> createService(): T = Retrofit.Builder()
         .baseUrl(mockWebServer.url("/"))
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
         .build()
-        .create(clazz)
+        .create(T::class.java)
 }

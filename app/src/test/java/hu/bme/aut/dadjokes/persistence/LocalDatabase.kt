@@ -12,16 +12,15 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21])
 abstract class LocalDatabase {
     lateinit var db: AppDatabase
+        private set
 
     @Before
-    fun initDB() {
+    open fun initDB() {
         db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase::class.java)
             .allowMainThreadQueries()
             .build()
     }
 
     @After
-    fun closeDB() {
-        db.close()
-    }
+    fun closeDB() = db.close()
 }

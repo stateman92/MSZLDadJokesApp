@@ -10,15 +10,13 @@ fun LazyListScope.items(
     key: ((index: Int) -> Any)? = null,
     itemContent: @Composable LazyItemScope.(index: Int) -> Unit,
     lastItemIsShown: () -> Unit
-) {
-    items(count = count, key = key) {
-        if (it == count - 1) {
-            LaunchedEffect(key1 = Unit) {
-                lastItemIsShown()
-            }
+) = items(count = count, key = key) {
+    if (it == count - 1) {
+        LaunchedEffect(key1 = Unit) {
+            lastItemIsShown()
         }
-        itemContent(it)
     }
+    itemContent(it)
 }
 
 fun <T> LazyListScope.items(
@@ -26,10 +24,6 @@ fun <T> LazyListScope.items(
     key: ((index: Int) -> Any)? = null,
     itemContent: @Composable LazyItemScope.(item: T) -> Unit,
     lastItemIsShown: () -> Unit
-) {
-    items(count = items.count(), key = key, itemContent = {
-        itemContent(items[it])
-    }) {
-        lastItemIsShown()
-    }
-}
+) = items(count = items.count(), key = key, itemContent = {
+    itemContent(items.get(index = it))
+}, lastItemIsShown = lastItemIsShown)
