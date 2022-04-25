@@ -1,9 +1,6 @@
 package hu.bme.aut.dadjokes.model.dto
 
-data class JokeListResponseDTO(
-    val success: Boolean,
-    val body: Array<JokeDTO>
-) {
+data class JokeListResponseDTO(val success: Boolean, val body: Array<JokeDTO>) {
     // Generated methods
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

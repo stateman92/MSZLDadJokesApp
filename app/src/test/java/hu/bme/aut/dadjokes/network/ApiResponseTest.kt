@@ -13,12 +13,12 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class ApiResponseTest : ApiAbstract<NetworkService>() {
+class ApiResponseTest : ApiAbstract() {
     private lateinit var service: NetworkService
 
     @Before
     fun init() {
-        service = createService(NetworkService::class.java)
+        service = createService()
     }
 
     @Test
@@ -30,7 +30,7 @@ class ApiResponseTest : ApiAbstract<NetworkService>() {
 
     @Test
     fun testGetJokeList() = runBlocking {
-        enqueueResponse("Jokes.json")
+        enqueueResponse(JsonResource.JOKES)
         val jokeList = service.getJokeList(count = "5").getOrThrow().toJokes()
         assertThat(jokeList.get(index = 0).id, `is`("60dd36610b83921d24207d9f"))
         assertThat(jokeList.get(index = 1).id, `is`("60dd3770d3008f40c3ca0468"))
@@ -42,28 +42,28 @@ class ApiResponseTest : ApiAbstract<NetworkService>() {
 
     @Test
     fun testCreateJoke() = runBlocking {
-        enqueueResponse(fileName = "OK.json")
+        enqueueResponse(JsonResource.OK)
         val response = service.createJoke(joke = Joke.mock()).getOrThrow()
         assertThat(response.response, `is`("OK"))
     }
 
     @Test
     fun testLikeJoke() = runBlocking {
-        enqueueResponse(fileName = "OK.json")
+        enqueueResponse(JsonResource.OK)
         val response = service.likeJoke(id = Joke.mock().id, like = true).getOrThrow()
         assertThat(response.response, `is`("OK"))
     }
 
     @Test
     fun testDislikeJoke() = runBlocking {
-        enqueueResponse(fileName = "OK.json")
+        enqueueResponse(JsonResource.OK)
         val response = service.likeJoke(id = Joke.mock().id, like = false).getOrThrow()
         assertThat(response.response, `is`("OK"))
     }
 
     @Test
     fun testDeleteJoke() = runBlocking {
-        enqueueResponse(fileName = "OK.json")
+        enqueueResponse(JsonResource.OK)
         val response = service.deleteJoke(id = Joke.mock().id).getOrThrow()
         assertThat(response.response, `is`("OK"))
     }
